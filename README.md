@@ -1,4 +1,4 @@
-# online-shop
+# Online-shop
 
 ## Setup project:
 
