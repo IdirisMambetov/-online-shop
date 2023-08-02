@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from apps.products.models import Product
+from apps.categories.models import Category
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -26,7 +27,7 @@ class ProductUpdateSerializer(serializers.Serializer):
     price = serializers.IntegerField(required=False)
     country = serializers.CharField(max_length=50, required=False)
     created_at = serializers.CharField(max_length=20, required=False)
-    category = serializers.IntegerField(required=False)
+    category = serializers.PrimaryKeyRelatedField(required=False, queryset=Category.objects.all())
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
