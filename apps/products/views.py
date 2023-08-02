@@ -22,7 +22,7 @@ class ProductRetrieveAPIView(generics.RetrieveAPIView):
 class ProductCreateAPIView(generics.CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductCreateSerializer
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         user = request.user
@@ -44,7 +44,7 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
             user = request.user
             data = request.data
             product = Product.objects.filter(id=pk, owner=user).first()
-            if user == product.owner:
+            if product:
                 serializer = ProductUpdateSerializer(data=data, partial=True)
                 if serializer.is_valid():
                     serializer.update(product, serializer.validated_data)
