@@ -7,7 +7,7 @@
 2. python3 -m venv env
 3. source env/bin/activate
 4. pip3 install -r requirements.txt
-5. python3 manange.py migrate
+5. python3 manage.py migrate
 
 
 ### Second
