@@ -20,7 +20,14 @@ class RatingCreateAPIView(generics.CreateAPIView):
                 user = request.user
                 rating = data['rating']
                 product = Product.objects.get(id=data['product'])
-                Rating.objects.create(user=user, product=product, rating=rating)
+
+                rating_obj = Rating.objects.filter(user=user, product=product).first()
+                if rating_obj:
+                    rating_obj.rating = rating
+                    rating_obj.save()
+                else:
+                    Rating.objects.create(user=user, product=product, rating=rating)
+
                 ratings = Rating.objects.filter(product=product).values_list('rating', flat=True)
                 product.rating = sum(ratings) / len(ratings)
                 product.save()
