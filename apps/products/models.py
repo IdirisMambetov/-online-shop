@@ -11,6 +11,7 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     country = models.CharField(max_length=150)
     is_active = models.BooleanField(default=True)
+    rating = models.IntegerField(default=0)
     created_at = models.DateField(auto_created=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_products')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_products')
